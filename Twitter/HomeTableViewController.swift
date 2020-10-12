@@ -11,7 +11,7 @@ import UIKit
 class HomeTableViewController: UITableViewController {
     
     var tweetArray = [NSDictionary]()
-    var numTweets: Integer
+    var numTweets = 0
 
     @IBAction func onLogoutClick(_ sender: Any) {
         TwitterAPICaller.client?.logout()
@@ -25,9 +25,9 @@ class HomeTableViewController: UITableViewController {
         let user = tweetArray[indexPath.row]["user"] as! NSDictionary
         
         cell.userNameLabel.text = user["name"] as? String
-        cell.tweetContentLabel = tweetArray[indexPath.row]["text"] as? String
+        cell.tweetContentLabel.text = tweetArray[indexPath.row]["text"] as? String
 
-        let imageURL = URL(string: (user["profile_image_usr_https"] as? String)!)
+        let imageURL = URL(string: (user["profile_image_url_https"] as? String)!)
         let data = try? Data(contentsOf: imageURL!)
         
         if let imageData = data {
@@ -43,10 +43,10 @@ class HomeTableViewController: UITableViewController {
     }
     
     func loadTweet(){
-        tweetURL = "https://api.twitter.com/1.1/statuses/home_timeline.json"
-        let tweetParams = ["count": 10]
-        
-        TwitterAPICaller.client.getDictionariesRequest(url: tweetURL, parameters: tweetParams, success: { (tweets: [NSDictionary]) in
+        let tweetURL = "https://api.twitter.com/1.1/statuses/home_timeline.json"
+        let tweetParams = ["count": tweetArray.count]
+
+        TwitterAPICaller.client?.getDictionariesRequest(url: tweetURL, parameters: tweetParams, success: { (tweets: [NSDictionary]) in
             
             self.tweetArray.removeAll()
             for tweet in tweets {
@@ -55,8 +55,9 @@ class HomeTableViewController: UITableViewController {
             
             self.tableView.reloadData()
             
-        }, failure: (Error) in
+        }, failure: { (error) in
             print("Failed to retrieve tweets!")
+        })
     }
 
     // MARK: - Table view data source
