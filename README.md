@@ -23,5 +23,5 @@ The following **bonus** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-<img src="https://github.com/HiroinaProtagonist/FlixsterApp/blob/main/0jCeLCs05c_ezgif.gif?raw=true" title="Unit 3 Video Walkthrough" alt="Unit 3 Video Walkthrough" width="250px"/><br>
+<img src="https://github.com/HiroinaProtagonist/twitter_ios/blob/main/0jCeLCs05c_ezgif.gif?raw=true" title="Unit 3 Video Walkthrough" alt="Unit 3 Video Walkthrough" width="250px"/><br>
 
