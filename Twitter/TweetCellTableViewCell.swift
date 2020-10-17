@@ -24,6 +24,17 @@ class TweetCellTableViewCell: UITableViewCell {
         })
     }
     
+    //retweet or unretweet
+    func setRetweeted(_ isRetweeted:Bool) {
+        if (isRetweeted) {
+            retweetButton.setImage(UIImage(named:"retweet-icon-green"), for: UIControl.State.normal)
+            retweetButton.isEnabled = false
+        } else {
+            retweetButton.setImage(UIImage(named:"retweet-icon"), for: UIControl.State.normal)
+            retweetButton.isEnabled = true
+        }
+    }
+    
     @IBOutlet weak var favButton: UIButton!
     
     @IBAction func favoriteTweet(_ sender: Any) {
@@ -45,7 +56,6 @@ class TweetCellTableViewCell: UITableViewCell {
     
     var tweetId:Int = -1
     var favorited:Bool = false
-    var retweeted:Bool = false
     
     //favorite or unfavorite
     func setFavorite(_ isFavorited:Bool) {
@@ -56,18 +66,6 @@ class TweetCellTableViewCell: UITableViewCell {
             favButton.setImage(UIImage(named:"favor-icon"), for: UIControl.State.normal)
         }
     }
-    
-    //retweet or unretweet
-    func setRetweeted(_ isRetweeted:Bool) {
-        if (retweeted) {
-            retweetButton.setImage(UIImage(named:"retweet-icon-green"), for: UIControl.State.normal)
-            retweetButton.isEnabled = false
-        } else {
-            retweetButton.setImage(UIImage(named:"retweet-icon"), for: UIControl.State.normal)
-            retweetButton.isEnabled = true
-        }
-    }
-    
     
     override func awakeFromNib() {
         super.awakeFromNib()
