@@ -34,12 +34,30 @@ class HomeTableViewController: UITableViewController {
             cell.profileImageView.image = UIImage(data: imageData)
         }
         
+        //set favorite status
+        cell.setFavorite(tweetArray[indexPath.row]["favorited"] as! Bool)
+        
+        //set retweet status
+        cell.setRetweeted(tweetArray[indexPath.row]["retweeted"] as! Bool)
+        
+        //set tweet id for fav/unfav
+        cell.tweetId = tweetArray[indexPath.row]["id"] as! Int
+        
         return cell
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadTweet()
+        
+        //My height is fine, but ref:
+        //from 11:35/30:00 - Favoriting Tweets, set height
+        //self.tweetTable.rowHeight = UITableView.automaticDimension
+        //self.tweetTable.estimatedRowHeight = 150
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.loadTweet()
     }
     
     func loadTweet(){
@@ -71,7 +89,7 @@ class HomeTableViewController: UITableViewController {
         // #warning Incomplete implementation, return the number of rows
         return tweetArray.count
     }
-
+    
     /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
